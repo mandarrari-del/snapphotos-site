@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SnapPhotos — Photo missions with small rewards</title>
+<meta name="description" content="SnapPhotos is a mobile app with short daily photo missions. Photograph everyday objects, get each photo checked by AI and earn a small reward for every approved photo.">
+<link rel="icon" type="image/png" sizes="256x256" href="/assets/icone/flor-256.png">
+<link rel="apple-touch-icon" href="/assets/icone/flor-apple-180.png">
+<meta property="og:title" content="SnapPhotos — Photo missions with small rewards">
+<meta property="og:description" content="Photograph everyday objects with your phone and earn a small reward for every approved photo.">
+<meta property="og:image" content="/img/vsl-capa.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#2F7BF5;--azul-esc:#1A4FB8;--azul-claro:#EAF2FF;--tinta:#0E1B33;--tinta-2:#55617a;--linha:#e6ebf2;--fundo:#f6f8fb;--verde:#16A34A;--ambar:#B45309;
+  --titulo:"Plus Jakarta Sans",Inter,system-ui,sans-serif;--r:22px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,sans-serif;color:var(--tinta);background:#fff;line-height:1.55;font-size:16px;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.box{width:min(1120px,100% - 32px);margin:0 auto}
+h1,h2,h3{font-family:var(--titulo);letter-spacing:-.02em;line-height:1.12}
+h2{font-size:clamp(28px,4vw,40px);text-align:center;margin-bottom:12px}
+.sub{color:var(--tinta-2);text-align:center;max-width:640px;margin:0 auto 40px;font-size:17px}
+section{padding:80px 0}
+.eyebrow{display:block;text-align:center;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--azul);margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:16px;font-weight:700;font-size:16px;text-decoration:none;border:0;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:active{transform:scale(.98)}
+.btn-azul{background:linear-gradient(180deg,#3d86fa,var(--azul));color:#fff;box-shadow:0 14px 28px -12px rgb(47 123 245 / .65),inset 0 1px 0 rgb(255 255 255 / .25)}
+.btn-azul:hover{box-shadow:0 18px 34px -12px rgb(47 123 245 / .8)}
+.btn-claro{background:#fff;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--linha)}
+.btn:focus-visible,a:focus-visible{outline:3px solid #9cc2ff;outline-offset:3px}
+
+/* topo */
+header{position:sticky;top:0;z-index:20;background:rgb(255 255 255 / .9);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+header .box{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
+.marca{display:flex;align-items:center;gap:10px;font-family:var(--titulo);font-weight:800;font-size:19px;text-decoration:none}
+.marca img{width:32px;height:32px}
+nav{display:flex;gap:26px;font-size:15px;font-weight:600;color:var(--tinta-2)}
+nav a{text-decoration:none}
+nav a:hover{color:var(--tinta)}
+header .btn{height:42px;padding:0 18px;font-size:14.5px;border-radius:12px}
+@media (max-width:760px){nav{display:none}}
+
+/* hero */
+.hero{padding:64px 0 72px;background:radial-gradient(900px 500px at 80% 10%,#dbe9ff 0,transparent 60%),radial-gradient(700px 400px at 0% 90%,#eef5ff 0,transparent 60%)}
+.hero .box{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.selo{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:99px;padding:8px 14px;font-size:13.5px;font-weight:600;box-shadow:0 0 0 1px var(--linha)}
+.selo i{width:8px;height:8px;border-radius:50%;background:var(--verde)}
+.hero h1{font-size:clamp(36px,5.4vw,58px);margin:18px 0 18px}
+.hero h1 em{font-style:normal;color:var(--azul)}
+.hero p.lead{font-size:18.5px;color:var(--tinta-2);max-width:540px}
+.acoes{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 26px}
+.confia{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:14px;color:var(--tinta-2);font-weight:500}
+.confia span{display:flex;align-items:center;gap:8px}
+.confia svg{width:18px;height:18px;stroke:var(--verde);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.celular{position:relative;justify-self:center;width:min(330px,80vw);aspect-ratio:9/19.3;border-radius:46px;background:#0b0f18;padding:12px;box-shadow:0 50px 80px -30px rgb(14 27 51 / .45),0 0 0 2px #23293a inset}
+.celular img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:36px}
+.flutua{position:absolute;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 18px 40px -14px rgb(14 27 51 / .35);font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.flutua b{font-family:var(--titulo);font-size:18px;color:var(--verde)}
+.f1{left:-70px;top:22%}.f2{right:-60px;bottom:20%}
+.f2 .ok{width:28px;height:28px;border-radius:50%;background:var(--verde);display:grid;place-items:center}
+.f2 .ok svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:3}
+@media (max-width:900px){.hero .box{grid-template-columns:1fr}.hero{text-align:center}.hero p.lead{margin:0 auto}.acoes,.confia{justify-content:center}.f1{left:-20px}.f2{right:-20px}}
+@media (max-width:420px){.flutua{display:none}}
+
+/* vídeo */
+.video{background:var(--fundo)}
+.player{width:min(460px,100%);margin:0 auto;aspect-ratio:4/5;border-radius:26px;overflow:hidden;background:#000;box-shadow:0 40px 70px -30px rgb(14 27 51 / .5)}
+.player video{width:100%;height:100%;object-fit:cover}
+
+/* por que */
+.pedidos{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pedido{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 0 0 1px var(--linha),0 18px 36px -24px rgb(14 27 51 / .3)}
+.pedido img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.pedido div{padding:14px 16px}
+.pedido small{font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--azul)}
+.pedido b{display:block;font-family:var(--titulo);font-size:18px;margin:2px 0}
+.pedido span{color:var(--tinta-2);font-size:14px}
+@media (max-width:860px){.pedidos{grid-template-columns:repeat(2,1fr)}}
+
+/* passos */
+.passos{background:linear-gradient(180deg,#fff,var(--fundo))}
+.lista-passos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.passo{background:#fff;border-radius:var(--r);padding:18px 18px 0;box-shadow:0 0 0 1px var(--linha);display:flex;flex-direction:column;overflow:hidden}
+.passo .n{width:34px;height:34px;border-radius:11px;background:var(--azul-claro);color:var(--azul);font-weight:800;display:grid;place-items:center;font-family:var(--titulo)}
+.passo h3{font-size:19px;margin:12px 0 6px}
+.passo p{color:var(--tinta-2);font-size:14.5px;margin-bottom:16px}
+.passo img{margin-top:auto;border-radius:18px 18px 0 0;aspect-ratio:9/11;object-fit:cover;object-position:top;box-shadow:0 0 0 6px #0b0f18}
+@media (max-width:960px){.lista-passos{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.lista-passos{grid-template-columns:1fr}}
+
+/* comunidade */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.duas h2,.duas .sub{text-align:left;margin-left:0}
+.check{list-style:none;display:grid;gap:12px;margin-top:6px}
+.check li{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.check svg{flex:none;width:24px;height:24px;margin-top:1px;padding:4px;border-radius:50%;background:#E8F7EE;stroke:var(--verde);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.placas{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.placas img{border-radius:16px;aspect-ratio:1;object-fit:cover;box-shadow:0 14px 28px -16px rgb(14 27 51 / .45)}
+@media (max-width:860px){.duas{grid-template-columns:1fr}.duas h2,.duas .sub{text-align:center;margin-left:auto}}
+
+/* planos */
+.planos{background:var(--fundo)}
+.grade-planos{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.plano{background:#fff;border-radius:26px;padding:28px 24px;box-shadow:0 0 0 1px var(--linha);display:flex;flex-direction:column}
+.plano.pro{box-shadow:0 0 0 2px var(--azul),0 30px 60px -30px rgb(47 123 245 / .55);position:relative}
+.plano .tag{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--azul);color:#fff;border-radius:99px;padding:6px 14px;font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.plano h3{font-size:22px}
+.plano .preco{font-family:var(--titulo);font-size:42px;font-weight:800;letter-spacing:-.03em;margin:10px 0 2px}
+.plano .preco small{font-size:15px;font-weight:600;color:var(--tinta-2);letter-spacing:0}
+.plano .pg{color:var(--tinta-2);font-size:14px;margin-bottom:18px}
+.plano ul{list-style:none;display:grid;gap:10px;margin-bottom:24px;font-size:15px}
+.plano li{display:flex;gap:10px}
+.plano li svg{flex:none;width:20px;height:20px;stroke:var(--azul);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.plano .btn{margin-top:auto;width:100%}
+.nota-planos{text-align:center;color:var(--tinta-2);font-size:14px;margin-top:22px}
+@media (max-width:900px){.grade-planos{grid-template-columns:1fr;max-width:460px;margin:0 auto}}
+
+/* garantia + aviso */
+.garantia{display:flex;gap:26px;align-items:center;background:linear-gradient(135deg,var(--azul),var(--azul-esc));color:#fff;border-radius:28px;padding:34px}
+.garantia .escudo{flex:none;width:96px;height:96px;border-radius:50%;background:rgb(255 255 255 / .14);display:grid;place-items:center}
+.garantia .escudo svg{width:52px;height:52px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.garantia h3{font-size:26px;margin-bottom:6px}
+.garantia p{opacity:.92}
+@media (max-width:640px){.garantia{flex-direction:column;text-align:center}}
+.aviso{margin-top:22px;background:#FFF8EB;border-radius:20px;padding:22px 24px;color:#5b3b00;font-size:15px;box-shadow:inset 0 0 0 1px #f6dfae}
+.aviso b{color:#4a3000}
+
+/* faq */
+.faq{max-width:760px;margin:0 auto;display:grid;gap:12px}
+details{background:#fff;border-radius:18px;box-shadow:0 0 0 1px var(--linha);padding:4px 20px}
+summary{cursor:pointer;list-style:none;font-weight:700;padding:16px 0;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--azul)}
+details[open] summary::after{content:"–"}
+details p{color:var(--tinta-2);padding-bottom:18px}
+
+/* cta final + rodapé */
+.final{text-align:center;background:radial-gradient(700px 300px at 50% 0,#dbe9ff,transparent 70%)}
+.final h2{margin-bottom:14px}
+footer{background:var(--tinta);color:#c9d3e6;padding:44px 0;font-size:14px}
+footer .box{display:grid;gap:16px}
+footer .links{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:#fff;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .legal{font-size:12.5px;color:#93a1bb;line-height:1.6}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="box">
+    <a class="marca" href="#"><img src="/assets/icone/flor-256.png" alt="">SnapPhotos</a>
+    <nav aria-label="Main"><a href="#how">How it works</a><a href="#plans">Plans</a><a href="#faq">FAQ</a></nav>
+    <a class="btn btn-azul" href="#plans">See plans</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="box">
+    <div>
+      <span class="selo"><i></i>New: daily photo missions</span>
+      <h1>Photograph everyday objects. <em>Get rewarded</em> for every approved photo.</h1>
+      <p class="lead">SnapPhotos is a mobile app with short photo missions: a mug, a remote, a plant by the window. Companies need real photos of ordinary things. You take them with the phone you already have, our AI checks each one in seconds, and approved photos add a small reward to your balance.</p>
+      <div class="acoes">
+        <a class="btn btn-azul" href="#plans">Choose your plan</a>
+        <a class="btn btn-claro" href="#video">Watch how it works</a>
+      </div>
+      <div class="confia">
+        <span><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>30-day money-back guarantee</span>
+        <span><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Secure checkout by Digistore24</span>
+        <span><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Withdraw via PayPal, Wise or bank</span>
+      </div>
+    </div>
+    <div class="celular">
+      <img src="/img/app-missoes.jpg" alt="SnapPhotos app showing today's photo missions and the reward for each one" width="900" height="1947">
+      <div class="flutua f1">Coffee mug <b>+$0.07</b></div>
+      <div class="flutua f2"><span class="ok"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>Photo approved</div>
+    </div>
+  </div>
+</section>
+
+<section class="video" id="video">
+  <div class="box">
+    <span class="eyebrow">1-minute overview</span>
+    <h2>See SnapPhotos in action</h2>
+    <p class="sub">How missions work, how the AI reviews each photo and how rewards reach your balance.</p>
+    <div class="player">
+      <video controls playsinline preload="none" poster="/img/vsl-capa.jpg">
+        <source src="/vsl.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <span class="eyebrow">Why photos of a mug?</span>
+    <h2>Companies need real photos of everyday things</h2>
+    <p class="sub">Instead of paying for a studio, companies post photo requests on SnapPhotos, for example to build image collections for computer vision. Each request becomes a short mission for members.</p>
+    <div class="pedidos">
+      <div class="pedido"><img src="/img/cena-mug.jpg" alt="Coffee mug on a wooden desk" loading="lazy"><div><small>REQUEST</small><b>Coffee mug</b><span>Natural light, object filling the frame</span></div></div>
+      <div class="pedido"><img src="/img/cena-remote.jpg" alt="TV remote on a sofa" loading="lazy"><div><small>REQUEST</small><b>TV remote</b><span>Sharp, clean background</span></div></div>
+      <div class="pedido"><img src="/img/cena-charger.jpg" alt="Phone charger on a nightstand" loading="lazy"><div><small>REQUEST</small><b>Phone charger</b><span>Whole object in view</span></div></div>
+      <div class="pedido"><img src="/img/cena-plant.jpg" alt="Houseplant by a window" loading="lazy"><div><small>REQUEST</small><b>Houseplant</b><span>By a window, daylight</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="passos" id="how">
+  <div class="box">
+    <span class="eyebrow">How it works</span>
+    <h2>Four steps, a few minutes a day</h2>
+    <p class="sub">No professional camera, no editing skills. Each mission tells you exactly what to photograph and how.</p>
+    <div class="lista-passos">
+      <div class="passo"><span class="n">1</span><h3>Pick a mission</h3><p>New missions every day. Each one has a 24-hour deadline.</p><img src="/img/app-missoes.jpg" alt="List of daily missions" loading="lazy"></div>
+      <div class="passo"><span class="n">2</span><h3>Follow the brief</h3><p>Object filling the frame, good light, clean background.</p><img src="/img/app-ficha.jpg" alt="Mission brief with photo requirements" loading="lazy"></div>
+      <div class="passo"><span class="n">3</span><h3>AI review in seconds</h3><p>The object, sharpness and light are checked automatically.</p><img src="/img/app-aprovada.jpg" alt="Approved photo with AI analysis" loading="lazy"></div>
+      <div class="passo"><span class="n">4</span><h3>Reward to your balance</h3><p>Withdraw from $300 via PayPal, Wise or bank transfer.</p><img src="/img/app-carteira.jpg" alt="Wallet with balance and payout options" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="box duas">
+    <div>
+      <span class="eyebrow" style="text-align:left">You're not alone</span>
+      <h2>A community, a weekly ranking and awards as you go</h2>
+      <p class="sub">Share tips with other members, follow the official team posts and unlock plaques as your approved missions add up.</p>
+      <ul class="check">
+        <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Official guidance from the SnapPhotos team</li>
+        <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Weekly ranking with privacy controls</li>
+        <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Awards from First Graduation (100 missions) to Professional (100,000)</li>
+        <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Support chat answered by the team</li>
+      </ul>
+    </div>
+    <div class="placas">
+      <img src="/img/premio-100.jpg" alt="First Graduation plaque" loading="lazy">
+      <img src="/img/premio-500.jpg" alt="Bronze plaque" loading="lazy">
+      <img src="/img/premio-1000.jpg" alt="Silver plaque" loading="lazy">
+      <img src="/img/premio-5000.jpg" alt="Gold plaque" loading="lazy">
+      <img src="/img/premio-10000.jpg" alt="Platinum plaque" loading="lazy">
+      <img src="/img/premio-50000.jpg" alt="Diamond plaque" loading="lazy">
+      <img src="/img/premio-100000.jpg" alt="Professional trophy" loading="lazy">
+      <img src="/img/app-premios.jpg" alt="Awards screen in the app" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="planos" id="plans">
+  <div class="box">
+    <span class="eyebrow">Plans</span>
+    <h2>Start free. Upgrade when you want more missions.</h2>
+    <p class="sub">Paid plans are a one-time payment, not a subscription, with a 30-day money-back guarantee. The withdrawal minimum is the same on every plan.</p>
+    <div class="grade-planos">
+      <div class="plano">
+        <h3>Starter</h3>
+        <div class="preco">Free</div>
+        <p class="pg">No card required</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>5 missions per day</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Standard missions</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Community and ranking</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Payout in up to 7 business days</li>
+        </ul>
+        <a class="btn btn-claro" data-app href="#plans">Start free</a>
+      </div>
+      <div class="plano">
+        <h3>Plus</h3>
+        <div class="preco">$29.90 <small>one-time</small></div>
+        <p class="pg">30-day money-back guarantee</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>15 missions per day</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Premium missions unlocked</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>1.5× reward on every mission</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Payout in 3 business days</li>
+        </ul>
+        <a class="btn btn-claro" data-compra="plus" href="#plans">Get Plus</a>
+      </div>
+      <div class="plano pro">
+        <span class="tag">MOST POPULAR</span>
+        <h3>Pro</h3>
+        <div class="preco">$34.90 <small>one-time</small></div>
+        <p class="pg">Only $5 more than Plus · 30-day guarantee</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>No daily cap: missions released all day</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Premium missions unlocked</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>2× reward on every mission</li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Payout within 24 hours (business days)</li>
+        </ul>
+        <a class="btn btn-azul" data-compra="pro" href="#plans">Get Pro</a>
+      </div>
+    </div>
+    <p class="nota-planos">Payments are processed securely by Digistore24, our authorized reseller.</p>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <div class="garantia">
+      <div class="escudo"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></div>
+      <div>
+        <h3>30-day money-back guarantee</h3>
+        <p>Try a paid plan for 30 days. If it's not for you, request a full refund through Digistore24 or by writing to us. No questions asked.</p>
+      </div>
+    </div>
+    <div class="aviso">
+      <b>What to expect.</b> SnapPhotos pays small rewards: most missions pay between $0.05 and $0.30 per approved photo, up to 2× on Pro. It is not a job or a way to replace an income. Reaching the $300 withdrawal minimum takes time: about a month of daily missions on Pro at the current pace, and much longer on the free plan. Rewards depend on the missions available and on your photos being approved. A paid plan is never required to withdraw.
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--fundo)">
+  <div class="box">
+    <span class="eyebrow">FAQ</span>
+    <h2>Questions, answered</h2>
+    <p class="sub">Still unsure? Write to <a href="mailto:support@nexusagencyseo.online">support@nexusagencyseo.online</a>.</p>
+    <div class="faq">
+      <details><summary>Do I need a professional camera?</summary><p>No. Any recent smartphone works. Each mission explains the framing and light it needs, and the AI tells you why a photo was not approved so you can try again.</p></details>
+      <details><summary>Why do companies want these photos?</summary><p>Teams that build and test image-recognition systems need large numbers of real photos of everyday objects, taken in real homes and light. Photos may be included in image collections we license to them. Your name, email and payout details are never included.</p></details>
+      <details><summary>How much can I earn?</summary><p>Each approved photo adds a small reward, usually between $0.05 and $0.30 (up to 2× on Pro). How much you accumulate depends on how many missions you complete and how many are approved. We make no promise of income.</p></details>
+      <details><summary>How do withdrawals work?</summary><p>When your balance reaches $300 you can withdraw to PayPal, Wise or an international bank account in USD. The minimum is the same on every plan and a $2 fee applies to each request.</p></details>
+      <details><summary>Is the paid plan a subscription?</summary><p>No. Plus and Pro are a single payment. There are no recurring charges.</p></details>
+      <details><summary>How do I get a refund?</summary><p>Within 30 days of purchase, request it through the link in your Digistore24 receipt email or write to us with your order ID. See our <a href="/refund.html">refund policy</a>.</p></details>
+      <details><summary>What photos are not allowed?</summary><p>Screenshots, images from the internet, duplicates, other people's faces, documents, cards and private screens. Missions are about everyday objects only.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="box">
+    <h2>Your first mission takes about a minute</h2>
+    <p class="sub">Start free, or get Pro with a 30-day money-back guarantee.</p>
+    <a class="btn btn-azul" href="#plans">Choose your plan</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="box">
+    <a class="marca" href="#" style="color:#fff"><img src="/assets/icone/flor-256.png" alt="">SnapPhotos</a>
+    <div class="links"><a href="/terms.html">Terms of Use</a><a href="/privacy.html">Privacy Policy</a><a href="/refund.html">Refund Policy</a><a href="/cookies.html">Cookies</a><a href="/contact.html">Contact</a></div>
+    <p class="legal">© 2026 SnapPhotos · operated by Nexus Management Global, LLC · 7345 W Sand Lake Rd, Suite 210, Office 2345, Orlando, FL 32819, United States · CNPJ 66.721.719/0001-20 · support@nexusagencyseo.online<br>
+    Digistore24 is the authorized reseller of the paid plans. Rewards are small and vary; results are not guaranteed. This site is not part of or endorsed by Meta, Google or any other platform.</p>
+  </div>
+</footer>
+
+<script>
+/* Links de compra: preencher com os IDs dos produtos da Digistore24 quando forem criados.
+   APP: endereço do app (funil gratuito) quando estiver no ar. Vazio = os botões levam aos planos. */
+const DIGISTORE = { plus: "", pro: "" };
+const APP = "";
+document.querySelectorAll("[data-compra]").forEach(a => {
+  const id = DIGISTORE[a.dataset.compra];
+  if (id) a.href = "https://www.digistore24.com/product/" + id + "?language=en";
+});
+if (APP) document.querySelectorAll("[data-app]").forEach(a => a.href = APP);
+</script>
+<script>
+/* Pixel da Meta: só carrega depois do "Accept". Mesmos pixels do app. */
+(function(){
+  var PIXELS = ["1711687053847327", "2727755177642705"], CH = "snap_cookies";
+  function ok(){ try { return localStorage.getItem(CH); } catch(e) { return null; } }
+  var carregado = false;
+  function carrega(){
+    if (carregado || ok() !== "sim" || !PIXELS.length) return; carregado = true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    PIXELS.forEach(function(p){ fbq("init", p); }); fbq("track", "PageView");
+  }
+  window.snapTrack = function(nome, dados){ if (carregado && window.fbq) fbq("track", nome, dados || {}); };
+  function aviso(){
+    if (ok() || !PIXELS.length) return;
+    var el = document.createElement("div");
+    el.setAttribute("role","dialog"); el.setAttribute("aria-label","Cookies");
+    el.style.cssText = "position:fixed;left:12px;right:12px;bottom:12px;z-index:99;max-width:540px;margin:0 auto;background:#0E1B33;color:#fff;border-radius:16px;padding:14px 16px;font:14px/1.45 Inter,system-ui,sans-serif;box-shadow:0 18px 40px -12px rgba(0,0,0,.45);display:flex;gap:12px;align-items:center;flex-wrap:wrap";
+    el.innerHTML = '<p style="flex:1 1 240px;margin:0">We use cookies to measure our ads. You can accept or decline; the site works the same either way. <a href="/cookies.html" style="color:#9cc2ff">Cookies</a></p><div><button data-c="nao" style="border:0;border-radius:10px;padding:10px 16px;font:600 14px Inter,sans-serif;cursor:pointer;background:rgba(255,255,255,.12);color:#fff">Decline</button> <button data-c="sim" style="border:0;border-radius:10px;padding:10px 16px;font:600 14px Inter,sans-serif;cursor:pointer;background:#2F7BF5;color:#fff">Accept</button></div>';
+    el.addEventListener("click", function(ev){ var c = ev.target.getAttribute && ev.target.getAttribute("data-c"); if(!c) return; try{localStorage.setItem(CH,c);}catch(e){} el.remove(); carrega(); });
+    document.body.appendChild(el);
+  }
+  carrega(); aviso();
+  document.addEventListener("click", function(ev){
+    var a = ev.target.closest && ev.target.closest("[data-compra]");
+    if (a) snapTrack("InitiateCheckout", { currency: "USD", value: a.dataset.compra === "pro" ? 34.9 : 29.9, content_name: a.dataset.compra });
+  });
+  var v = document.querySelector("video"); if (v) v.addEventListener("play", function once(){ snapTrack("ViewContent", { content_name: "overview video" }); v.removeEventListener("play", once); });
+})();
+</script>
+</body>
+</html>
